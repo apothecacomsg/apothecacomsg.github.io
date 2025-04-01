@@ -10,7 +10,7 @@
             const redirectUrl = urlParams.get('redir');
 
             // Define allowed domains
-            const allowedDomains = ["tcpsoftware.com", "tcpsoftware.com"];
+            const allowedDomains = ["tcpsoftware.com"];
 
             if (redirectUrl) {
                 try {
@@ -35,5 +35,6 @@
     </script>
 </head>
 <body>
+    <p>If you're not redirected automatically, <a id="redirectLink" href="https://www.google.com">click here</a>.</p>
 </body>
 </html>
