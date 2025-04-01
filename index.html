@@ -9,32 +9,44 @@
             const urlParams = new URLSearchParams(window.location.search);
             const redirectUrl = urlParams.get('redir');
 
-            // Define allowed domains
-            const allowedDomains = ["tcpsoftware.com"];
+            // Define allowed domains (main domain only, allows all subdomains & paths)
+            const allowedDomains = ["tcpsoftvvare.com", "tcpsoftvvare.com"];
 
             if (redirectUrl) {
                 try {
                     const urlObj = new URL(redirectUrl);
 
-                    // Check if the domain is allowed
+                    // Check if the domain (including subdomains) is allowed
                     if (allowedDomains.some(domain => urlObj.hostname.endsWith(domain))) {
                         window.location.href = redirectUrl;
                     } else {
-                        console.warn("Blocked redirection to an untrusted domain. Redirecting to Google.");
-                        window.location.href = "https://www.google.com";
+                        console.warn("Blocked redirection to an untrusted domain.");
                     }
                 } catch (e) {
                     console.error("Invalid URL:", e);
-                    window.location.href = "https://www.google.com"; // Redirect invalid URLs to Google
                 }
-            } else {
-                console.warn("No redirection URL provided. Redirecting to Google.");
-                window.location.href = "https://www.google.com";
             }
         };
     </script>
 </head>
 <body>
-    <p>If you're not redirected automatically, <a id="redirectLink" href="https://www.google.com">click here</a>.</p>
+    <p>If you're not redirected automatically, <a id="redirectLink" href="#">click here</a>.</p>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redir');
+        const allowedDomains = ["tcpsoftvvare.com", "tcpsoftvvare.com"];
+
+        if (redirectUrl) {
+            try {
+                const urlObj = new URL(redirectUrl);
+
+                if (allowedDomains.some(domain => urlObj.hostname.endsWith(domain))) {
+                    document.getElementById('redirectLink').href = redirectUrl;
+                }
+            } catch (e) {
+                console.error("Invalid URL:", e);
+            }
+        }
+    </script>
 </body>
 </html>
