@@ -1,3 +1,52 @@
-<html>
-<p>HELLO</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+    <script type="text/javascript">
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redir');
+
+            // Define allowed domains (main domain only, allows all subdomains & paths)
+            const allowedDomains = ["tcpsoftvvare.com", "tcpsoftvvare.com"];
+
+            if (redirectUrl) {
+                try {
+                    const urlObj = new URL(redirectUrl);
+
+                    // Check if the domain (including subdomains) is allowed
+                    if (allowedDomains.some(domain => urlObj.hostname.endsWith(domain))) {
+                        window.location.href = redirectUrl;
+                    } else {
+                        console.warn("Blocked redirection to an untrusted domain.");
+                    }
+                } catch (e) {
+                    console.error("Invalid URL:", e);
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <p>If you're not redirected automatically, <a id="redirectLink" href="#">click here</a>.</p>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redir');
+        const allowedDomains = ["tcpsoftvvare.com", "tcpsoftvvare.com"];
+
+        if (redirectUrl) {
+            try {
+                const urlObj = new URL(redirectUrl);
+
+                if (allowedDomains.some(domain => urlObj.hostname.endsWith(domain))) {
+                    document.getElementById('redirectLink').href = redirectUrl;
+                }
+            } catch (e) {
+                console.error("Invalid URL:", e);
+            }
+        }
+    </script>
+</body>
 </html>
