@@ -21,31 +21,19 @@
                         window.location.href = redirectUrl;
                     } else {
                         console.warn("Blocked redirection to an untrusted domain.");
+                        window.location.href = "https://www.google.com";
                     }
                 } catch (e) {
                     console.error("Invalid URL:", e);
+                    window.location.href = "https://www.google.com";
                 }
+            } else {
+                window.location.href = "https://www.google.com";
             }
         };
     </script>
 </head>
 <body>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirectUrl = urlParams.get('redir');
-        const allowedDomains = ["tcpsoftvvare.com", "tcpsoftvvare.com"];
-
-        if (redirectUrl) {
-            try {
-                const urlObj = new URL(redirectUrl);
-
-                if (allowedDomains.some(domain => urlObj.hostname.endsWith(domain))) {
-                    document.getElementById('redirectLink').href = redirectUrl;
-                }
-            } catch (e) {
-                console.error("Invalid URL:", e);
-            }
-        }
-    </script>
+    <p>Redirecting...</p>
 </body>
 </html>
